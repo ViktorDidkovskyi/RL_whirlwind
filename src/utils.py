@@ -100,10 +100,47 @@ def next_z_generate_point(z_input, ksi, betta, alfa, use_second_interaction=Fals
     return z_new
 
 
+def loss_center_alfa_betta(alfa_betta, args):
+    """
+
+    :param alfa_betta:
+    :param args:
+    :return:
+    """
+    betta, alfa = alfa_betta
+    z_null, z, ksi, alfa, use_second_interaction, betta_list, alfa_list = args
+
+    z_new = next_z_generate_point(z, ksi, betta, alfa, use_second_interaction)
+
+    II_null = circulation_moment(z_null)
+    # II_prev = calculate_dist_to_center_complex(z_complex, betta)
+    II_next = circulation_moment(z_new)
+
+    # return II_next - II_null + np.sum(np.divide(1 ,betta_list))
+    return II_next + betta ** 2
+
+
+def loss_center_alfa(betta, args):
+    """
+
+    :param betta:
+    :param args:
+    :return:
+    """
+    z_null, z, ksi, alfa, use_second_interaction, betta_list = args
+
+    z_new = next_z_generate_point(z, ksi, betta, alfa, use_second_interaction)
+
+    II_null = circulation_moment(z_null)
+    # II_prev = calculate_dist_to_center_complex(z_complex, betta)
+    II_next = circulation_moment(z_new)
+
+    return II_next - II_null + np.sum(np.divide(1, betta_list))
+
 def generate_random_dots(min_value: float, max_value: float, n_whirlwind: int) -> np.array:
     """
     :param min_value:
-    :param c:
+    :param max_value:
     :param n_whirlwind:
     :return:
     """
