@@ -145,6 +145,9 @@ class StockTradingEnv(gym.Env):
 
 
 
+import tensorflow as tf
+
+print(tf.__version__)
 
 from stable_baselines.common.policies import MlpPolicy
 from stable_baselines.common.vec_env import DummyVecEnv
