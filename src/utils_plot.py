@@ -2,9 +2,8 @@ import matplotlib.pyplot as plt
 import itertools
 import numpy as np
 
-#points_memory = main_measure_dict['points']
 
-def plot_the_whirlwind(points_memory):
+def plot_the_whirlwind(points_memory, path_to_save: str = ""):
     """
 
     :param z_memory:
@@ -23,17 +22,20 @@ def plot_the_whirlwind(points_memory):
         for point in points:
             ax.scatter(*point, label="x", alpha=1, marker='x')
 
-
         colorst = itertools.cycle(color_list[:c + 1])
         for j1, color in zip(ax.collections, colorst):
             j1.set_color(color)
 
     # ax.legend( prop={'size': 10})
+
+    plt.grid()
+    plt.savefig(path_to_save + ".jpg")
     plt.show(block=True)
     plt.interactive(False)
 
 
-def plot_metrics(list_data, title: str = "Title"):
+
+def plot_metrics(list_data, title: str = "Title", path_to_save: str = ""):
     """
 
     :param list_data:
@@ -44,8 +46,10 @@ def plot_metrics(list_data, title: str = "Title"):
 
     ax.scatter(range(len(list_data)), list_data, label="x", alpha=1, s=25, color="blue", marker='x')
 
-    ax.legend(prop={'size': 10})
+    # ax.legend(prop={'size': 10})
     plt.title(title.title())
+    plt.grid()
+    plt.savefig(path_to_save + ".jpg")
     plt.show(block=True)
     plt.interactive(False)
 
@@ -62,6 +66,7 @@ def plot_points(points):
     ax.scatter(*zip(*points), label="x", color="blue", marker='x')
 
     ax.legend(prop={'size': 10})
+    plt.grid()
     plt.show(block=True)
     plt.interactive(False)
 
